@@ -66,9 +66,9 @@ describe('creating own object with properties and methods - types and syntax - d
     });
 
     it('checking methods logic', function() {
-        spyOn(car, "startEngine");
-        spyOn(car, "changeColor");
-        spyOn(car, "stopEngine");
+        spyOn(car, "startEngine").and.callThrough();
+        spyOn(car, "changeColor").and.callThrough();
+        spyOn(car, "stopEngine").and.callThrough();
 
         car.startEngine();
         expect(car.startEngine).toHaveBeenCalled();
@@ -82,19 +82,12 @@ describe('creating own object with properties and methods - types and syntax - d
         expect(car.stopEngine).toHaveBeenCalled();
         expect(car.engineRunning).toBeFalsy();
     });
-
     it('extending an object with new properties', function() {
         // Create an object (named newCar) based on the car object using the Object.create() method
         // Extend the created object with properties and methods
 
         var newCar = Object.create(car);
-        newCar.climatronicOn = false;
-        newCar.startClimatronic = function(){
-            newCar.climatronicOn = true;
-        }
-        newCar.stopClimatronic = function(){
-            newCar.climatronicOn = false;
-        }
+        /* add properties and methods to the newCar object */
 
         spyOn(newCar, 'startClimatronic').and.callThrough();
         spyOn(newCar, 'stopClimatronic').and.callThrough();
@@ -198,7 +191,7 @@ describe('creating functions with constructors - types and syntax - day 2', () =
     it('checking methods logic', function(){
         // create car passing the name, model and color to the ColorConstructor (using the 'new' operator)
         var car;
-        spyOn(car, "changeColor");
+        spyOn(car, "changeColor").and.callThrough();
 
         expect(car.getName()).toEqual( /* YOUR ANSWER HERE */ );
         expect(car.getModel()).toEqual( /* YOUR ANSWER HERE */ );
